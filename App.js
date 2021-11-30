@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -19,13 +19,13 @@ const HomeScreen = ({ navigation }) => {
         </Text>
       </TouchableOpacity >
 
-      <TouchableOpacity style={styles.homeScreen} onPress={()=> navigation.navigate('EmployeesList')}>
+      <TouchableOpacity style={styles.homeScreen} onPress={() => navigation.navigate('EmployeesList')}>
         <Text style={styles.homeScreenText}>
           Manage Employees
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.homeScreen} onPress={()=> navigation.navigate('OrdersList')}>
+      <TouchableOpacity style={styles.homeScreen} onPress={() => navigation.navigate('OrdersList')}>
         <Text style={styles.homeScreenText}>
           Manage Orders
         </Text>
@@ -36,12 +36,35 @@ const HomeScreen = ({ navigation }) => {
 
 
 const ProductsList = ({ navigation }) => {
-  return (
-    <View>
-      <Text>
-        cat
-      </Text>
+  const arrayData = [{ id: 1, Name: "Watch", Price: "Rs 1000", Image: "https://static-01.daraz.pk/p/cff44875e81c1e9169fc7ff331b53d21.jpg" }]
 
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity>
+        <View style={{ marginTop: 25, alignItems: "center" }}>
+          <Text style={{ fontSize: 25 }}>
+            Name: {item.Name}
+          </Text>
+          <Text style={{ fontSize: 25 }}>
+            Price {item.Price}
+          </Text>
+          <Image source={{ uri: item.Image }} style={{ width: 50, height: 50 }} />
+
+        </View>
+      </TouchableOpacity>
+
+    )
+
+  }
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={arrayData}
+        keyExtractor={arrayData.Id}
+        renderItem={renderItem}
+
+
+      />
     </View>
 
   )
@@ -62,7 +85,7 @@ const OrdersList = ({ navigation }) => {
   return (
     <View>
       <Text>
-        cat
+        cattt
       </Text>
 
     </View>
